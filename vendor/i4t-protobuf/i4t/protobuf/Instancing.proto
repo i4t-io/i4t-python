@@ -1,0 +1,83 @@
+/** @file Instancing.proto
+ * @brief I4T Instancing Warrant and Token
+ *
+ * @copyright
+ * Copyright 2018 I4T <https://i4t.io>
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "pbose/protobuf/PbWK.proto";
+import "pbose/protobuf/PbWS.proto";
+
+package i4t.protobuf;
+
+/**
+ * I4T Instancing Token Claims
+ */
+message InstancingTokenClaims {
+  /* https://tools.ietf.org/html/rfc7519#section-4.1.1 */
+  string iss                            = 1;
+  /* https://tools.ietf.org/html/rfc7519#section-4.1.2 */
+  string sub                            = 2;
+  /* https://tools.ietf.org/html/rfc7519#section-4.1.3 */
+  string aud                            = 3;
+  /* https://tools.ietf.org/html/rfc7519#section-4.1.4 */
+  google.protobuf.Timestamp exp         = 4;
+  /* https://tools.ietf.org/html/rfc7519#section-4.1.5 */
+  google.protobuf.Timestamp nbf         = 5;
+  /* https://tools.ietf.org/html/rfc7519#section-4.1.6 */
+  google.protobuf.Timestamp iat         = 6;
+  /* https://tools.ietf.org/html/rfc7519#section-4.1.7 */
+  string jti                            = 7;
+  /* https://tools.ietf.org/html/rfc7519#section-4.2 */
+  bytes public                          = 8;
+  /* https://tools.ietf.org/html/rfc7519#section-4.3 */
+  bytes private                         = 9;
+  /* Public Key */
+  pbose.protobuf.PbWK public_key        = 11;
+  /* Serial Number */
+  string serial                         = 12;
+  /* Stock Keeping Unit */
+  string sku                            = 13;
+  /* Universal Product Code */
+  uint64 upc                            = 14;
+  /* Manufacturer Name */
+  string manufacturer_name              = 15;
+  /* Manufacturer Location */
+  string manufacturer_location          = 16;
+  /* Manufacturer Lot Number */
+  string manufacturer_lot               = 17;
+  /* Manufacturer Line Number */
+  string manufacturer_line              = 18;
+}
+
+/**
+ * I4T Instancing Warrant
+ */
+message InstancingWarrant {
+  /* I4T Protocol Version */
+  uint32 version                        = 1;
+  /* Instancing Token */
+  pbose.protobuf.PbWS token             = 2;
+  /* Private Key */
+  pbose.protobuf.PbWK private_key       = 3;
+}

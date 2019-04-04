@@ -1,0 +1,3 @@
+[submodule "vendor/i4t-protobuf"]
+	path = vendor/i4t-protobuf
+	url = git@git.nak.co:i4t/i4t-protobuf.git

@@ -1,0 +1,123 @@
+/** @file common.proto
+ * @brief I4T Common
+ *
+ * @copyright
+ * Copyright 2018 I4T <https://i4t.io>
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+syntax = "proto3";
+import "pbose/protobuf/PbWK.proto";
+
+package i4t.protobuf;
+
+/**
+ * I4T Hash Type
+ */
+message HashType {
+enum Enum {
+  UNKNOWN                               = 0;
+  /*  */
+  MD5                                   = 41;
+  /*  */
+  SHA1                                  = 42;
+  /*  */
+  SHA224                                = 43;
+  SHA256                                = 44;
+  SHA384                                = 45;
+  SHA512                                = 46;
+  SHA512_224                            = 47;
+  SHA512_256                            = 48;
+  /*  */
+  SHA3_224                              = 49;
+  SHA3_256                              = 50;
+  SHA3_384                              = 51;
+  SHA3_512                              = 52;
+  SHAKE128                              = 53;
+  SHAKE256                              = 54;
+}
+}
+
+/**
+ * I4T Application Information
+ */
+message ApplicationInformation {
+  /* Application Name */
+  string name                           = 1;
+  /* Connection Information */
+  ConnectionInformation connection      = 2;
+}
+
+/**
+ * I4T Connection Information
+ */
+message ConnectionInformation {
+  /* Connection Type */
+  ConnectionInformationType.Enum type   = 1;
+  /* Connection Host */
+  string host                           = 2;
+  /* Connection Port */
+  uint32 port                           = 3;
+  /* Connection Channel */
+  string channel                        = 4;
+}
+
+/**
+ * I4T Connection Information Type
+ */
+message ConnectionInformationType {
+enum Enum {
+  UNKNOWN                               = 0;
+  /* MQTT */
+  MQTT                                  = 1;
+  MQTTS                                 = 2;
+  /* HTTP */
+  HTTP                                  = 3;
+  HTTPS                                 = 4;
+  /* CoAP */
+  COAP                                  = 5;
+  COAPS                                 = 6;
+  /* Websockets */
+  WS                                    = 7;
+  WSS                                   = 8;
+  /* WebRTC */
+  WEBRTC                                = 9;
+  WEBRTCS                               = 10;
+}
+}
+
+/**
+ * I4T Peer Information
+ */
+message PeerInformation {
+  /* Peer Type */
+  PeerInformationType.Enum type         = 1;
+  /* Peer Public Key */
+  pbose.protobuf.PbWK public_key        = 2;
+}
+
+/**
+ * I4T Peer Information Type
+ */
+message PeerInformationType {
+enum Enum {
+  UNKNOWN                               = 0;
+}
+}

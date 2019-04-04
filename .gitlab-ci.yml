@@ -1,0 +1,44 @@
+variables:
+  COMPOSE_PROJECT_NAME: $CI_PROJECT_NAME-$CI_BUILD_REF_NAME
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://docker:2375
+  GIT_SUBMODULE_STRATEGY: recursive
+  IMAGE_TAG_BUILD: $CI_COMMIT_SHA
+  IMAGE_TAG_RELEASE: $CI_COMMIT_REF_NAME
+
+stages:
+  - build
+  - test
+  - release
+  - deploy
+
+test:py27:
+  stage: test
+  image: python:2.7
+  script:
+    - tox
+  coverage: '/TOTAL.+ ([0-9]{1,3}%)/'
+
+test:py34:
+  stage: test
+  image: python:3.4
+  script:
+    - tox
+
+test:py35:
+  stage: test
+  image: python:3.5
+  script:
+    - tox
+
+test:py36:
+  stage: test
+  image: python:3.6
+  script:
+    - tox
+
+test:py37:
+  stage: test
+  image: python:3.7
+  script:
+    - tox

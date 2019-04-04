@@ -1,0 +1,11 @@
+[MASTER]
+ignore =
+
+
+[MESSAGES CONTROL]
+disable =
+
+
+[FORMAT]
+indent-string = '  '
+indent-after-paren = 2
